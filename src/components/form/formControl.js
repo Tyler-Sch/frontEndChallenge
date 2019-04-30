@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import TextInput from './formComponents/formTextInput';
 import SelectInput from './formComponents/formSelectInput';
+import TextAreaInput from './formComponents/formTextAreaInput';
 
 const sampleData = {
     "data": [
@@ -32,6 +33,7 @@ export default function FormControl() {
   const [lastName, setLastName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [serviceTypesVal, setServiceTypeVal] = useState('');
+  const [textArea, setTextArea] = useState('');
 
   return (
     <div className="container">
@@ -56,7 +58,11 @@ export default function FormControl() {
         onchange={ setServiceTypeVal }
         placeholder="Select Service Type"
       />
-      </form>
-    </div>
+      <TextAreaInput
+        value={ textArea }
+        onchange={ setTextArea }
+      />
+     </form>
+   </div>
   )
 }
