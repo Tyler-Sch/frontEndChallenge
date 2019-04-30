@@ -8,7 +8,7 @@ export default function CheckBoxInput(props) {
         checked={ props.checked }
         onChange={ e => props.setChecked(!props.checked) }
       />
-    <label> { props.label }</label>
+    <label className="ml-2"> { props.label }</label>
     </div>
   )
 }
