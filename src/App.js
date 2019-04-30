@@ -5,8 +5,7 @@ import FormControl from './components/form/formControl';
 
 export default function App() {
   return (
-    <div className='container'>
-      <h1>Here we are in uniteus</h1>
+    <div className='container mt-4'>
       <FormControl />
     </div>
   );

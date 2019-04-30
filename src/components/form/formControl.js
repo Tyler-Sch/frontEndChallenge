@@ -42,8 +42,8 @@ export default function FormControl() {
 
   return (
     <div className="container border">
-
-      <form>
+      <h2>New Assistance Request</h2>
+      <form className="mb-2">
         <TextInput value={ firstName }
           onchange={ setFirstName }
           placeholder='First Name'
@@ -72,7 +72,14 @@ export default function FormControl() {
         setChecked={ setPolicyAccepted }
         label={ policyText }
       />
-    <button type="submit" className="btn btn-outline-primary">Get Assistance</button>
+      <div className="d-flex flex-row-reverse">
+        <button
+          disabled={ !policyAccepted }
+          type="submit"
+          className="btn btn-primary">
+            Get Assistance
+        </button>
+      </div>
      </form>
    </div>
   )
