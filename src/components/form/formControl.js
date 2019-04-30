@@ -30,6 +30,9 @@ const sampleData = {
 }
 
 export default function FormControl() {
+  // keeps creates and keeps track of form inputs for uniteus
+  // front end challenge
+
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
