@@ -11,6 +11,7 @@ export default function TextInput(props) {
           onChange={ (e) => props.onchange(e.target.value) }
           placeholder={ props.placeholder }
         />
+      <small className="text-danger float-right">{ props.smallText }</small>
     </div>
   )
 }

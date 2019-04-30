@@ -49,22 +49,26 @@ export default function FormControl() {
       <form className="mb-2">
         <TextInput value={ firstName }
           onchange={ setFirstName }
-          placeholder='First Name'
+          placeholder="First Name"
           type="text"
+          smallText="required"
         />
       <TextInput value={ lastName }
           onchange={ setLastName }
-          placeholder='Last Name'
+          placeholder="Last Name"
           type="text"
+          smallText="required"
         />
       <TextInput value={ emailAddress }
           onchange={ setEmailAddress }
-          placeholder='Email Address'
+          placeholder="Email Address"
           type="email"
+          smallText="required"
         />
       <SelectInput options={ sampleData.data }
         onchange={ setServiceTypeVal }
         placeholder="Select Service Type"
+        smallText="required"
       />
       <TextAreaInput
         value={ textArea }

@@ -18,6 +18,7 @@ export default function SelectInput(props) {
         <option value="" disabled selected>{ props.placeholder }</option>
         { options }
       </select>
+      <small className="text-danger float-right">{ props.smallText }</small>
     </div>
   )
 }
