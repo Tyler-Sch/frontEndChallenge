@@ -11,6 +11,7 @@ export default function SelectInput(props) {
   return (
     <div className="form-group">
       <select
+        className="form-control"
         value={ props.value }
         onChange={ e => props.onchange(e.target.value) }
       >

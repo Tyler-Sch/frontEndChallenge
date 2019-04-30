@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TextInput from './formComponents/formTextInput';
 import SelectInput from './formComponents/formSelectInput';
 import TextAreaInput from './formComponents/formTextAreaInput';
+import CheckBoxInput from './formComponents/formCheckBoxInput';
 
 const sampleData = {
     "data": [
@@ -34,9 +35,13 @@ export default function FormControl() {
   const [emailAddress, setEmailAddress] = useState('');
   const [serviceTypesVal, setServiceTypeVal] = useState('');
   const [textArea, setTextArea] = useState('');
+  const [policyAccepted, setPolicyAccepted] = useState(false);
+
+  const policyText = 'I hereby accept the terms of service for THE NETWORK'
+                    + ' and the Privacy Policy';
 
   return (
-    <div className="container">
+    <div className="container border">
 
       <form>
         <TextInput value={ firstName }
@@ -62,6 +67,12 @@ export default function FormControl() {
         value={ textArea }
         onchange={ setTextArea }
       />
+      <CheckBoxInput
+        checked={ policyAccepted }
+        setChecked={ setPolicyAccepted }
+        label={ policyText }
+      />
+    <button type="submit" className="btn btn-outline-primary">Get Assistance</button>
      </form>
    </div>
   )
