@@ -21,8 +21,37 @@ export default function FormControl(props) {
                     + ' and the Privacy Policy';
 
   const submit = (e) => {
+    // handles form submit
+    // checks data, organizes, and sends to parent container
     e.preventDefault();
     console.log({firstName, lastName, emailAddress, serviceTypesVal});
+    // check data
+    const data = {
+      firstName,
+      lastName,
+      emailAddress,
+      serviceTypesVal
+    };
+    for (var elem in data) {
+      if (data[elem].length === 0) {
+        console.log('error: invalid data');
+        return;
+      }
+    }
+    // put data in correct format
+    const formattedData = {
+      'assistance_request': {
+        'contact':{
+          'first_name': firstName,
+          'last_name': lastName,
+          'email': emailAddress
+        },
+        'service_type': serviceTypesVal,
+        'description': textArea
+      }
+    }
+    props.processPostRequest(formattedData);
+
   }
 
   return (

@@ -2,30 +2,6 @@ import React, { useState, useEffect } from 'react';
 import FormControl from './formControl';
 import Loading from '../loading/loading';
 
-const sampleData = {
-    "data": [
-        {
-            "display_name": "Benefits",
-            "id": "benefits"
-        },
-        {
-            "display_name": "Employment",
-            "id": "employment"
-        },
-        {
-            "display_name": "Healthcare",
-            "id": "healthcare"
-        },
-        {
-            "display_name": "Housing",
-            "id": "housing"
-        },
-        {
-            "display_name": "Legal",
-            "id": "legal"
-        }
-    ]
-}
 
 export default function FormContainer() {
   const [loading, setLoading] = useState(true);
@@ -60,12 +36,19 @@ export default function FormContainer() {
     setLoading(false);
   }
 
+  const processPostRequest = async(requestData) => {
+    console.log(requestData);
+  }
+
   return (
     <div>
       {
         loading
         ? <Loading />
-      : <FormControl data={ selectData }/>
+      : <FormControl
+          data={ selectData }
+          processPostRequest={ processPostRequest }
+        />
       }
 
     </div>
