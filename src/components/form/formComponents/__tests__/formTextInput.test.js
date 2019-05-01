@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup, fireEvent } from 'react-testing-library';
-import TextInput from './formTextInput';
+import TextInput from '../formTextInput';
 import 'jest-dom/extend-expect';
 
 afterEach(cleanup);
@@ -29,4 +29,29 @@ test('loads and displays correct input area', () => {
     expect(mockChange).toHaveBeenCalledTimes(1);
     expect(mockChange).toBeCalledWith('test');
 
+})
+
+test('small disappears when text entered', () => {
+  const mockChange = jest.fn();
+  const { getByText, rerender} = render(
+    <TextInput
+      type="text"
+      value=""
+      onchange={ mockChange }
+      placeholder="test text"
+      smallText="required"
+    />
+  );
+  const smallNode = getByText('required');
+  expect(smallNode.style.display).toBe('inline');
+  rerender(
+    <TextInput
+      type="text"
+      value="has value"
+      onchange={ mockChange }
+      placeholder="test text"
+      smallText="required"
+    />
+  );
+  expect(smallNode.style.display).toBe('none');
 })

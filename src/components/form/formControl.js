@@ -7,7 +7,7 @@ import CheckBoxInput from './formComponents/formCheckBoxInput';
 
 
 export default function FormControl(props) {
-  // keeps creates and keeps track of form inputs for uniteus
+  // creates and keeps track of form inputs for uniteus
   // front end challenge
 
   const [firstName, setFirstName] = useState('');
@@ -22,7 +22,7 @@ export default function FormControl(props) {
 
   const submit = (e) => {
     // handles form submit
-    // checks data, organizes, and sends to parent container
+    // checks data, organizes, and sends to parent container for api call
     e.preventDefault();
     // check data
     const data = {
@@ -52,12 +52,11 @@ export default function FormControl(props) {
     }
     // calls function to make api call
     props.processPostRequest(formattedData);
-
   }
 
   return (
     <div className="container border">
-      <h2>New Assistance Request</h2>
+      <h2 className="border-bottom">New Assistance Request</h2>
       <form className="mb-2" onSubmit={ submit }>
         <TextInput value={ firstName }
           onchange={ setFirstName }
