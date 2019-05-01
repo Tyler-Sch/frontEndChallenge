@@ -3,18 +3,6 @@ import FormControl from './formControl';
 import Loading from '../loading/loading';
 
 
-const testData = {
-  "assistance_request": {
-    "contact": {
-      "first_name": "Ulysses",
-      "last_name": "Grant",
-      "email": "ulysses@union.mil"
-    },
-    "service_type": "benefits",
-    "description": "The friend in my adversity I shall always cherish most. I can better trust those who have helped to relieve the gloom of my dark hours than those who are so ready to enjoy with me the sunshine of my prosperity."
-  }
-};
-
 export default function FormContainer() {
   const [loading, setLoading] = useState(true);
   const [selectData, setSelectData] = useState([]);
@@ -25,7 +13,6 @@ export default function FormContainer() {
     'Cache-Control': 'no-cache',
     'Host': 'localhost:49567'
   };
-
 
   useEffect(() => {
     // fetches service-type data
@@ -60,11 +47,11 @@ export default function FormContainer() {
     );
     const data = await response.json();
     // handle what responses you might get
+    alert(data.message);
   }
 
   return (
     <div>
-      
       {
         loading
         ? <Loading />
@@ -73,7 +60,6 @@ export default function FormContainer() {
           processPostRequest={ processPostRequest }
         />
       }
-
     </div>
   )
 }

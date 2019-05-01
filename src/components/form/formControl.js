@@ -29,11 +29,12 @@ export default function FormControl(props) {
       firstName,
       lastName,
       emailAddress,
-      serviceTypesVal
+      serviceTypesVal,
+      textArea
     };
     for (var elem in data) {
       if (data[elem].length === 0) {
-        console.log('error: invalid data');
+        alert('Error: The form is missing data');
         return;
       }
     }
@@ -86,6 +87,7 @@ export default function FormControl(props) {
       <TextAreaInput
         value={ textArea }
         onchange={ setTextArea }
+        smallText="required"
       />
       <CheckBoxInput
         checked={ policyAccepted }
