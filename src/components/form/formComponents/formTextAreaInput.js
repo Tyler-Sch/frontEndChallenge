@@ -1,7 +1,8 @@
 import React from 'react';
 
 export default function TextAreaInput(props) {
-
+  // takes props.value and props.onchange for handling input text
+  
   return (
     <div className="form-group">
       <textarea

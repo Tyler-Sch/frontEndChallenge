@@ -43,10 +43,15 @@ export default function FormControl() {
   const policyText = 'I hereby accept the terms of service for THE NETWORK'
                     + ' and the Privacy Policy';
 
+  const submit = (e) => {
+    e.preventDefault();
+    console.log({firstName, lastName, emailAddress, serviceTypesVal});
+  }
+
   return (
     <div className="container border">
       <h2>New Assistance Request</h2>
-      <form className="mb-2">
+      <form className="mb-2" onSubmit={ submit }>
         <TextInput value={ firstName }
           onchange={ setFirstName }
           placeholder="First Name"
@@ -65,7 +70,9 @@ export default function FormControl() {
           type="email"
           smallText="required"
         />
-      <SelectInput options={ sampleData.data }
+      <SelectInput
+        options={ sampleData.data }
+        value={ serviceTypesVal }
         onchange={ setServiceTypeVal }
         placeholder="Select Service Type"
         smallText="required"
