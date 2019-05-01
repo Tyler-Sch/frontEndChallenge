@@ -40,6 +40,10 @@ test('component renders correctly', () => {
 
   expect(container.querySelector('small').textContent).toBe('test');
 
+  fireEvent.change(container.querySelector('select'), {'target':{'value': 'id 2'}});
+  expect(mockChange).toHaveBeenCalledTimes(1);
+  expect(mockChange.mock.calls[0][0]).toBe('id 2')
+
 })
 
 test('small disappears when text entered', () => {

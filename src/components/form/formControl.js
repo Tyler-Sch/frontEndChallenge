@@ -9,6 +9,7 @@ import CheckBoxInput from './formComponents/formCheckBoxInput';
 export default function FormControl(props) {
   // creates and keeps track of form inputs for uniteus
   // front end challenge
+  // needs
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -64,43 +65,43 @@ export default function FormControl(props) {
           type="text"
           smallText="required"
         />
-      <TextInput value={ lastName }
-          onchange={ setLastName }
-          placeholder="Last Name"
-          type="text"
+        <TextInput value={ lastName }
+            onchange={ setLastName }
+            placeholder="Last Name"
+            type="text"
+            smallText="required"
+          />
+        <TextInput value={ emailAddress }
+            onchange={ setEmailAddress }
+            placeholder="Email Address"
+            type="email"
+            smallText="required"
+          />
+        <SelectInput
+          options={ props.data }
+          value={ serviceTypesVal }
+          onchange={ setServiceTypeVal }
+          placeholder="Select Service Type"
           smallText="required"
         />
-      <TextInput value={ emailAddress }
-          onchange={ setEmailAddress }
-          placeholder="Email Address"
-          type="email"
+        <TextAreaInput
+          value={ textArea }
+          onchange={ setTextArea }
           smallText="required"
         />
-      <SelectInput
-        options={ props.data }
-        value={ serviceTypesVal }
-        onchange={ setServiceTypeVal }
-        placeholder="Select Service Type"
-        smallText="required"
-      />
-      <TextAreaInput
-        value={ textArea }
-        onchange={ setTextArea }
-        smallText="required"
-      />
-      <CheckBoxInput
-        checked={ policyAccepted }
-        setChecked={ setPolicyAccepted }
-        label={ policyText }
-      />
-      <div className="d-flex flex-row-reverse">
-        <button
-          disabled={ !policyAccepted }
-          type="submit"
-          className="btn btn-primary">
-            Get Assistance
-        </button>
-      </div>
+        <CheckBoxInput
+          checked={ policyAccepted }
+          setChecked={ setPolicyAccepted }
+          label={ policyText }
+        />
+        <div className="d-flex flex-row-reverse">
+          <button
+            disabled={ !policyAccepted }
+            type="submit"
+            className="btn btn-primary">
+              Get Assistance
+          </button>
+        </div>
      </form>
    </div>
   )
