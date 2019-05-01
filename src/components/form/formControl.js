@@ -24,7 +24,6 @@ export default function FormControl(props) {
     // handles form submit
     // checks data, organizes, and sends to parent container
     e.preventDefault();
-    console.log({firstName, lastName, emailAddress, serviceTypesVal});
     // check data
     const data = {
       firstName,
@@ -50,6 +49,7 @@ export default function FormControl(props) {
         'description': textArea
       }
     }
+    // calls function to make api call
     props.processPostRequest(formattedData);
 
   }
