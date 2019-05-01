@@ -1,12 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import FormControl from './components/form/formControl';
+import FormContainer from './components/form/formContainer';
 
 export default function App() {
   return (
     <div className='container mt-4'>
-      <FormControl />
+      <FormContainer />
     </div>
   );
 }

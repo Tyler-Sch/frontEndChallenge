@@ -4,32 +4,9 @@ import SelectInput from './formComponents/formSelectInput';
 import TextAreaInput from './formComponents/formTextAreaInput';
 import CheckBoxInput from './formComponents/formCheckBoxInput';
 
-const sampleData = {
-    "data": [
-        {
-            "display_name": "Benefits",
-            "id": "benefits"
-        },
-        {
-            "display_name": "Employment",
-            "id": "employment"
-        },
-        {
-            "display_name": "Healthcare",
-            "id": "healthcare"
-        },
-        {
-            "display_name": "Housing",
-            "id": "housing"
-        },
-        {
-            "display_name": "Legal",
-            "id": "legal"
-        }
-    ]
-}
 
-export default function FormControl() {
+
+export default function FormControl(props) {
   // keeps creates and keeps track of form inputs for uniteus
   // front end challenge
 
@@ -71,7 +48,7 @@ export default function FormControl() {
           smallText="required"
         />
       <SelectInput
-        options={ sampleData.data }
+        options={ props.data }
         value={ serviceTypesVal }
         onchange={ setServiceTypeVal }
         placeholder="Select Service Type"

@@ -3,7 +3,7 @@ import React from 'react';
 export default function SelectInput(props) {
   // props.options is a list of values to be used for drop down select
   // in form of [{'display_name': something, 'id': 'something'}]
-
+  
   const options = props.options.map((op, idx) => (
     <option key={idx} value={ op.id }>{ op.display_name }</option>
   ));
