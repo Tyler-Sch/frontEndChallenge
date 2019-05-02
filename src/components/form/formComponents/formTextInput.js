@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 export default function TextInput(props) {
   const [hasText, setHasText] = useState(false);
-  const inputElement = useRef(null);
 
   useEffect(() => {
     // check if element has input
-    if (inputElement.current.value.length > 0) {
+    if (props.value.length > 0) {
       setHasText(true);
     }
-    else if (inputElement.current.value.length === 0) {
+    else if (props.value.length === 0) {
       setHasText(false);
     }
   },[props.value])
@@ -18,7 +17,6 @@ export default function TextInput(props) {
   return (
     <div className="form-group">
         <input
-          ref={ inputElement }
           className="form-control"
           type={ props.type }
           value={ props.value }

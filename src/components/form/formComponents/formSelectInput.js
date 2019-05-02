@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function SelectInput(props) {
   // props.options is a list of values to be used for drop down select
   // in form of [{'display_name': something, 'id': 'something'}]
 
   const [hasText, setHasText] = useState(false);
-  const inputElement = useRef(null);
 
   useEffect(() => {
     // check if element has input
-    if (inputElement.current.value.length > 0) {
+    if (props.value.length > 0) {
       setHasText(true);
     }
-    else if (inputElement.current.value.length === 0) {
+    else if (props.value.length === 0) {
       setHasText(false);
     }
   },[props.value])
@@ -25,7 +24,6 @@ export default function SelectInput(props) {
   return (
     <div className="form-group">
       <select
-        ref={ inputElement }
         className="form-control"
         value={ props.value }
         onChange={ e => props.onchange(e.target.value) }
