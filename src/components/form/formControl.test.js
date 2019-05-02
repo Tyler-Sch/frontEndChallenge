@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, cleanup, fireEvent, wait } from 'react-testing-library';
-import FormControl from './formControl';
+import FormDataControl from './formDataControl';
 import 'jest-dom/extend-expect';
 
 afterEach(cleanup);
@@ -34,7 +34,7 @@ const testData = {
 test('component renders with correct amount of inputs and select options', () => {
   const mockProcessPostRequest = jest.fn();
   const { container} = render(
-    <FormControl
+    <FormDataControl
       data={ testData.data }
       processPostRequst={ mockProcessPostRequest }
     />
@@ -43,14 +43,15 @@ test('component renders with correct amount of inputs and select options', () =>
   expect(container.querySelectorAll('select').length).toEqual(1);
   expect(container.querySelectorAll('textarea').length).toEqual(1);
 
-  expect(container.querySelectorAll('option').length).toEqual(6);
+  expect(container.querySelectorAll('option').length).toEqual(6); // 5 options
+  // plus one default
 });
 
 
 test('component inputs render on change events', () => {
   const mockProcessPostRequest = jest.fn();
   const { container, getByPlaceholderText, getByText } = render(
-    <FormControl
+    <FormDataControl
       data={ testData.data }
       processPostRequst={ mockProcessPostRequest }
     />
@@ -66,14 +67,15 @@ test('component inputs render on change events', () => {
   expect(selectInputForm.value).toEqual('legal');
 })
 
-test('component calls processPostRequest correctly', async () => {
+test('component calls processPostRequest correctly', () => {
   const mockProcessPostRequest = jest.fn();
   const { container, getByPlaceholderText, getByText } = render(
-    <FormControl
+    <FormDataControl
       data={ testData.data }
       processPostRequest={ mockProcessPostRequest }
     />
   );
+  // put information in all categories
   fireEvent.change(
     getByPlaceholderText('First Name'), {'target':{'value': 'testfirstname'}}
   );
@@ -98,11 +100,11 @@ test('component calls processPostRequest correctly', async () => {
     container.querySelector('textarea'), {'target': {'value': 'stuff'}}
   );
   expect(container.querySelector('textarea').value).toBe('stuff');
-
   fireEvent.click(
     container.querySelector('input[type="checkbox"]')
   );
   expect(container.querySelector('input[type="checkbox"]').checked).toBeTruthy()
+  // click submit button
 
   fireEvent.click(container.querySelector('button'));
 
@@ -110,7 +112,7 @@ test('component calls processPostRequest correctly', async () => {
 
   const calledWith = mockProcessPostRequest.mock.calls[0][0];
   expect(
-    calledWith.assistance_request.contact.first_name).toEqual('testfirstname')
+    calledWith.assistance_request.contact.first_name).toEqual('testfirstname');
   expect(
     calledWith.assistance_request.contact.last_name).toEqual('testLastName');
   expect(calledWith.assistance_request.service_type).toEqual('housing');
@@ -120,7 +122,7 @@ test('component calls processPostRequest correctly', async () => {
 test('component doesnt call processPostRequest when empty', () => {
   const mockProcessPostRequest = jest.fn();
   const { container, getByPlaceholderText, getByText } = render(
-    <FormControl
+    <FormDataControl
       data={ testData.data }
       processPostRequst={ mockProcessPostRequest }
     />
@@ -134,7 +136,7 @@ test('component doesnt call processPostRequest when empty', () => {
 test('checkbox enables button', () => {
   const mockProcessPostRequest = jest.fn();
   const { container, getByPlaceholderText, getByText } = render(
-    <FormControl
+    <FormDataControl
       data={ testData.data }
       processPostRequst={ mockProcessPostRequest }
     />
@@ -148,7 +150,7 @@ test('checkbox enables button', () => {
 test('cannot click submit button when checkbox unchecked', () => {
   const mockProcessPostRequest = jest.fn();
   const { container, getByPlaceholderText, getByText } = render(
-    <FormControl
+    <FormDataControl
       data={ testData.data }
       processPostRequst={ mockProcessPostRequest }
     />

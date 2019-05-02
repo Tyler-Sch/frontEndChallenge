@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import FormControl from './formControl';
+import FormDataControl from './formDataControl';
 import Loading from '../loading/loading';
 
 
@@ -67,7 +67,7 @@ export default function FormContainer() {
       {
         loading
         ? <Loading />
-      : <FormControl
+      : <FormDataControl
           data={ selectData }
           processPostRequest={ processPostRequest }
         />

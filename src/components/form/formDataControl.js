@@ -6,7 +6,7 @@ import CheckBoxInput from './formComponents/formCheckBoxInput';
 
 
 
-export default function FormControl(props) {
+export default function FormDataControl(props) {
   // creates and keeps track of form inputs for uniteus
   // front end challenge
   // needs
