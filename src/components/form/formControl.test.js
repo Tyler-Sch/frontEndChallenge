@@ -160,3 +160,43 @@ test('cannot click submit button when checkbox unchecked', () => {
   expect(mockProcessPostRequest).toHaveBeenCalledTimes(0);
 
 });
+
+test('cannot post new request when already in localstorage', () => {
+    const mockProcessPostRequest = jest.fn();
+    const { container, getByPlaceholderText, getByText } = render(
+      <FormDataControl
+        data={ testData.data }
+        processPostRequst={ mockProcessPostRequest }
+      />
+    );
+    const storeData = {
+        'firstName': 'testName',
+        'lastName': 'lastName',
+        'serviceType': 'benefits'
+    };
+    localStorage.setItem('test@test.com', JSON.stringify(storeData));
+
+    fireEvent.change(
+      getByPlaceholderText('First Name'), {'target':{'value': 'testName'}}
+    );
+    fireEvent.change(
+      getByPlaceholderText('Last Name'), {'target': {'value': 'lastName'}}
+    );
+    fireEvent.change(
+      getByPlaceholderText('Email Address'),
+          {'target': {'value': 'test@test.com'}}
+    );
+    fireEvent.change(
+      container.querySelector('select'), {'target': {'value': 'benefits'}}
+    );
+
+    fireEvent.change(
+      container.querySelector('textarea'), {'target': {'value': 'stuff'}}
+    );
+    fireEvent.click(
+      container.querySelector('input[type="checkbox"]')
+    );
+    // click submit button
+    fireEvent.click(container.querySelector('button'));
+    expect(mockProcessPostRequest).toHaveBeenCalledTimes(0);
+})
