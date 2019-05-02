@@ -18,7 +18,9 @@ export default function SelectInput(props) {
 
 
   const options = props.options.map((op, idx) => (
-    <option key={idx} value={ op.id }>{ op.display_name }</option>
+    <option key={idx} value={ op.id } >
+        { op.display_name }
+    </option>
   ));
 
   return (
@@ -28,7 +30,9 @@ export default function SelectInput(props) {
         value={ props.value }
         onChange={ e => props.onchange(e.target.value) }
       >
-        <option value="" disabled defaultValue>{ props.placeholder }</option>
+        <option value="" disabled defaultValue>
+            { props.placeholder }
+        </option>
         { options }
       </select>
       <small
