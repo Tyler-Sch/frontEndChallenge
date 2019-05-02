@@ -39,6 +39,19 @@ export default function FormDataControl(props) {
         return;
       }
     }
+    // check data to make sure same wasnt submitted
+    const userPreviousInfo = localStorage.getItem(emailAddress);
+    if (userPreviousInfo) {
+        const userData = JSON.parse(userPreviousInfo);
+        if (
+            userData.firstName === firstName
+            && userData.lastName === lastName
+            && userData.serviceType === serviceTypesVal
+        ) {
+            alert('This request has already been successfully processed');
+            return
+        }
+    }
     // put data in correct format
     const formattedData = {
       'assistance_request': {

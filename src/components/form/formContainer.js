@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import FormDataControl from './formDataControl';
 import Loading from '../loading/loading';
+import Success from './success';
 import axios from 'axios';
+
 
 
 export default function FormContainer() {
@@ -10,13 +12,15 @@ export default function FormContainer() {
 
   const [loading, setLoading] = useState(true);
   const [selectData, setSelectData] = useState([]);
+  const [success, setSuccess] = useState(false);
+  const [successData, setSuccessData] = useState({});
+
   const url = 'http://localhost:49567';
   const config = {
       'headers': {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
             'Cache-Control': 'no-cache',
-            'Host': 'localhost:49567'
         }
   };
 
@@ -26,19 +30,22 @@ export default function FormContainer() {
     },[]
   );
 
+  useEffect(() => {
+      if (success === false) {
+          setSuccessData({});
+      }
+
+  }, [success])
+
   const getInitialData = async() => {
     // function for loading initial data from service-types for the form
     const serviceTypeUrl = `${url}/api/service-types`;
 
+
     try {
-        console.log('trying get request')
       const response = await axios.get(serviceTypeUrl, config);
       const data = response.data;
-      console.log('this is data'
-      )
-      console.log(response.data);
       setSelectData(data.data);
-      console.log('setSelectData was called');
       setLoading(false);
     } catch(err) {
       alert('There was a problem fetching the initial data');
@@ -47,6 +54,7 @@ export default function FormContainer() {
 
   const processPostRequest = async(requestData) => {
     const postUrl = `${url}/api/assistance-requests`;
+
     try {
       const response = await axios.post(
           postUrl,
@@ -55,22 +63,38 @@ export default function FormContainer() {
       )
       const data = await response.data;
       // handle what responses you might get
+      if (response.status === 201) {
+          setSuccessData(data.echo);
+          setSuccess(true);
+      }
       alert(data.message);
     } catch(err) {
       alert('There was a problem contacting the server');
     }
   }
 
-  return (
-    <div>
-      {
-        loading
-        ? <Loading />
-      : <FormDataControl
-          data={ selectData }
-          processPostRequest={ processPostRequest }
-        />
-      }
-    </div>
-  )
+  if (!success) {
+      return (
+
+        <div>
+              {
+                loading
+                ? <Loading />
+              : <FormDataControl
+                  data={ selectData }
+                  processPostRequest={ processPostRequest }
+                />
+              }
+
+        </div>
+      )
+  }
+  else {
+      return (
+          <div>
+            <Success {...successData}
+                  back={() => setSuccess(false)} />
+          </div>
+      )
+  }
 }
