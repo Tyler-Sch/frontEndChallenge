@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import FormDataControl from './formDataControl';
 import Loading from '../loading/loading';
 import Success from './success';
-// import axios from 'axios';
-
 
 export default function FormContainer() {
   // contains logic for processing api calls and getting initial data
@@ -59,11 +57,6 @@ export default function FormContainer() {
   const processPostRequest = async(requestData) => {
     const postUrl = `${url}/api/assistance-requests`;
 
-    // const response = await axios.post(
-    //     postUrl,
-    //     requestData,
-    //     config
-    // )
     const response = await fetch(
       postUrl,
       {
@@ -81,7 +74,6 @@ export default function FormContainer() {
     else {
       alert(data.message);
     }
-
   }
 
   if (!success) {
