@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
 export default function TextAreaInput(props) {
-  // takes props.value and props.onchange for handling input text
+  // takes props:
+  // value -> value kept track of in parent,
+  // onchange -> for handling change to value
+  // smallText -> small text to right of input 
   const [hasText, setHasText] = useState(false);
 
   useEffect(() => {

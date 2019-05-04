@@ -30,6 +30,7 @@ export default function FormContainer() {
   );
 
   useEffect(() => {
+    // resets data when success changes to false
       if (success === false) {
           setSuccessData({});
       }
@@ -39,8 +40,6 @@ export default function FormContainer() {
   const getInitialData = async() => {
     // function for loading initial data from service-types for the form
     const serviceTypeUrl = `${url}/api/service-types`;
-
-
     try {
       const response = await axios.get(serviceTypeUrl, config);
       const data = response.data;
@@ -53,7 +52,6 @@ export default function FormContainer() {
 
   const processPostRequest = async(requestData) => {
     const postUrl = `${url}/api/assistance-requests`;
-
     try {
       const response = await axios.post(
           postUrl,

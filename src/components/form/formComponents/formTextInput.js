@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 
 
 export default function TextInput(props) {
+  // takes props: type -> ie: email, password, text,
+  //  value -> state passed down from parent,
+  // onchange -> function to modify value to new value,
+  // placholder -> placeholder text in input,
+  // smallText -> small text to right of input 
   const [hasText, setHasText] = useState(false);
 
   useEffect(() => {
