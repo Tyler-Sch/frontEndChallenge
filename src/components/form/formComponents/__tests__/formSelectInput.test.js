@@ -16,18 +16,24 @@ const inputData = [
   }
 ];
 
+const options = inputData.map((op, idx) => (
+  <option key={idx} value={ op.id } >
+      { op.display_name }
+  </option>
+));
+
 test('component renders correctly', () => {
 
   const mockChange = jest.fn();
 
   const { container } = render(
     <SelectInput
-      options={ inputData }
       onchange={ mockChange }
       placeholder="holder"
       smallText="test"
       value=""
-    />
+    > { options }
+  </SelectInput>
   );
 
   const optionList = container.querySelectorAll("option");
@@ -50,12 +56,13 @@ test('small disappears when text entered', () => {
   const mockChange = jest.fn();
   const { container, getByText, rerender} = render(
     <SelectInput
-      options={ inputData }
       onchange={ mockChange }
       placeholder="holder"
       smallText="required"
       value=""
-    />
+    >
+    { options }
+  </SelectInput>
   );
   const selectNode = container.querySelector('select');
   expect(selectNode.value).toBe('');

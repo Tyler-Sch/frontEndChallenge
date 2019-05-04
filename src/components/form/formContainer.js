@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FormDataControl from './formDataControl';
 import Loading from '../loading/loading';
 import Success from './success';
-import axios from 'axios';
+// import axios from 'axios';
 
 
 export default function FormContainer() {
@@ -41,8 +41,14 @@ export default function FormContainer() {
     // function for loading initial data from service-types for the form
     const serviceTypeUrl = `${url}/api/service-types`;
     try {
-      const response = await axios.get(serviceTypeUrl, config);
-      const data = response.data;
+      const response = await fetch(
+        serviceTypeUrl,
+        {
+          'method': 'GET',
+          'headers': config.headers
+        }
+      );
+      const data = await response.json();
       setSelectData(data.data);
       setLoading(false);
     } catch(err) {
@@ -52,21 +58,30 @@ export default function FormContainer() {
 
   const processPostRequest = async(requestData) => {
     const postUrl = `${url}/api/assistance-requests`;
-    try {
-      const response = await axios.post(
-          postUrl,
-          requestData,
-          config
-      )
-      const data = await response.data;
-      // handle what responses you might get
-      if (response.status === 201) {
-          setSuccessData(data.echo);
-          setSuccess(true);
+
+    // const response = await axios.post(
+    //     postUrl,
+    //     requestData,
+    //     config
+    // )
+    const response = await fetch(
+      postUrl,
+      {
+        'method': 'POST',
+        'headers': config.headers,
+        body: JSON.stringify(requestData)
       }
-    } catch(err) {
-      alert('There was a problem contacting the server');
+    );
+    const data = await response.json();
+    // handle what responses you might get
+    if (response.status === 201) {
+        setSuccessData(data.echo);
+        setSuccess(true);
     }
+    else {
+      alert(data.message);
+    }
+
   }
 
   if (!success) {

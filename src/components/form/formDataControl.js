@@ -67,6 +67,12 @@ export default function FormDataControl(props) {
     props.processPostRequest(formattedData);
   }
 
+  const options = props.data.map((op, idx) => (
+    <option key={idx} value={ op.id } >
+        { op.display_name }
+    </option>
+  ));
+
   return (
     <div className="container border">
       <h2 className="border-bottom">New Assistance Request</h2>
@@ -90,12 +96,13 @@ export default function FormDataControl(props) {
             smallText="required"
           />
         <SelectInput
-          options={ props.data }
           value={ serviceTypesVal }
           onchange={ setServiceTypeVal }
           placeholder="Select Service Type"
           smallText="required"
-        />
+        >
+          { options }
+        </SelectInput>
         <TextAreaInput
           value={ textArea }
           onchange={ setTextArea }

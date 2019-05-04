@@ -34,10 +34,14 @@ run test
 
 App.js calls a FormContainer from the form folder.
 
-In form folder:
+#### In form folder:
 
 File | Description
 -----|------------
 formContainer.js | contains code for get and post calls to the api
 formDataControl.js | keeps track of the state of form inputs and validates request information before passing data to formContainer for api call
 success.js | returns html when a successful request is made and writes basic info to localStorage to prevent duplicate requests
+
+#### In the formComponents:
+
+There are several generic input components including components for text input, checkbox, select form

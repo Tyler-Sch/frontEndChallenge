@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 export default function SelectInput(props) {
+  // send props.children as a series of <option></option>
   // takes props:
-  // options -> list of values to be used for drop down select
-  //   in form of [{'display_name': something, 'id': 'something'}],
   // value -> from parent,
   // onchange -> function to modify value to new value,
   // placholder -> placeholder text in input,
-  // smallText -> small text to right of input 
+  // smallText -> small text to right of input
 
   const [hasText, setHasText] = useState(false);
 
@@ -21,13 +20,6 @@ export default function SelectInput(props) {
     }
   },[props.value])
 
-
-  const options = props.options.map((op, idx) => (
-    <option key={idx} value={ op.id } >
-        { op.display_name }
-    </option>
-  ));
-
   return (
     <div className="form-group">
       <select
@@ -38,7 +30,7 @@ export default function SelectInput(props) {
         <option value="" disabled defaultValue>
             { props.placeholder }
         </option>
-        { options }
+        { props.children }
       </select>
       <small
         className="text-danger float-right"
