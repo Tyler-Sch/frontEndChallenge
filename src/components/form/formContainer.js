@@ -5,7 +5,6 @@ import Success from './success';
 import axios from 'axios';
 
 
-
 export default function FormContainer() {
   // contains logic for processing api calls and getting initial data
   // from api for the form
@@ -67,7 +66,6 @@ export default function FormContainer() {
           setSuccessData(data.echo);
           setSuccess(true);
       }
-      alert(data.message);
     } catch(err) {
       alert('There was a problem contacting the server');
     }
