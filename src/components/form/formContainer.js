@@ -28,7 +28,8 @@ export default function FormContainer() {
   );
 
   useEffect(() => {
-    // resets data when success changes to false
+    // resets data when success changes to false ie: when back button
+    // from success screen is pushed
       if (success === false) {
           setSuccessData({});
       }
