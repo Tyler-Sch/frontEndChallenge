@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './formContainer';
+import App from '../formContainer';
 import { act } from 'react-dom/test-utils';
 
 const testData = {"data": [
