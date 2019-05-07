@@ -11,8 +11,6 @@ export default function FormContainer() {
   const [selectData, setSelectData] = useState([]);
   const [success, setSuccess] = useState(false);
   const [successData, setSuccessData] = useState({});
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
 
 
   const url = 'http://localhost:49567';
@@ -35,8 +33,6 @@ export default function FormContainer() {
     // from success screen is pushed
       if (success === false) {
           setSuccessData({});
-          setError(false);
-          setErrorMessage('');
       }
 
   }, [success])
@@ -80,20 +76,14 @@ export default function FormContainer() {
         break;
       case 401:
         alert(data.message);
-        setError(true);
-        setErrorMessage(data.message);
         throw new Error(401);
         break;
       case 500:
         alert(data.message);
-        setError(true);
-        setErrorMessage(data.message);
         throw new Error(500);
         break;
       case 503:
         alert(data.message);
-        setError(true);
-        setErrorMessage(data.message);
         throw new Error(503);
       default:
         alert('something unknown is going');
@@ -105,7 +95,6 @@ export default function FormContainer() {
       return (
 
         <div>
-            {error && <h1 className="is-danger">{ errorMessage }</h1>}
               {
                 loading
                 ? <Loading />
