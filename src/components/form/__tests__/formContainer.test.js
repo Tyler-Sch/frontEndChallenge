@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../formContainer';
-import { act } from 'react-dom/test-utils';
+import FormContainer from '../formContainer';
+import { render, waitForElement, cleanup, fireEvent } from 'react-testing-library';
+import FormDataControl from '../formDataControl';
 
+
+afterEach(cleanup);
 const testData = {"data": [
         {
             "display_name": "Benefits",
@@ -16,7 +19,7 @@ const testData = {"data": [
   }
 
 
-it("should display fetched data", () => {
+it("should display fetched data", async () => {
   // a rather simple mock, you might use something more advanced for your needs
   // jest.useFakeTimers();
   global.fetch = jest.fn().mockImplementation(() => ({
@@ -24,23 +27,12 @@ it("should display fetched data", () => {
         json: () => new Promise((resolve, reject) => {
           resolve(testData);
         })
-}))
+  }))
+  const { container, getByText } = render(<FormContainer />);
+  expect(container.querySelector('h1').innerHTML).toBe('Loading... ');
+  await waitForElement(() => getByText('New Assistance Request'));
 
-  const el = document.createElement('div');
-  act(() => {
-    ReactDOM.render(<App />, el);
-  })
-  expect(el.querySelector('h1').innerHTML).toBe('Loading... ');
-
-  // act(() => {
-  //   jest.runAllImmediates();
-  // });
-  process.nextTick(() => {
-
-    expect(el.querySelector('h2').innerHTML).toBe('New Assistance Request');
-    expect(el.querySelectorAll('select').length).toBe(1);
-    expect(el.querySelectorAll('option').length).toBe(3);
-    expect(el.querySelectorAll('option')[2].innerHTML).toBe('Employment');
-
-  });
+  expect(container.querySelectorAll('select').length).toBe(1);
+  expect(container.querySelectorAll('option').length).toBe(3);
+  expect(container.querySelectorAll('option')[2].innerHTML).toBe('Employment');
 })

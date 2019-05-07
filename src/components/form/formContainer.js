@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import FormDataControl from './formDataControl';
 import Loading from '../loading/loading';
 import Success from './success';
@@ -11,6 +11,9 @@ export default function FormContainer() {
   const [selectData, setSelectData] = useState([]);
   const [success, setSuccess] = useState(false);
   const [successData, setSuccessData] = useState({});
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const url = 'http://localhost:49567';
   const config = {
@@ -24,7 +27,7 @@ export default function FormContainer() {
   useEffect(() => {
     // fetches service-type data
     getInitialData();
-    },[]
+  }, []
   );
 
   useEffect(() => {
@@ -32,6 +35,8 @@ export default function FormContainer() {
     // from success screen is pushed
       if (success === false) {
           setSuccessData({});
+          setError(false);
+          setErrorMessage('');
       }
 
   }, [success])
@@ -55,9 +60,8 @@ export default function FormContainer() {
     }
   }
 
-  const processPostRequest = async(requestData) => {
+  const processPostRequest = async (requestData) => {
     const postUrl = `${url}/api/assistance-requests`;
-
     const response = await fetch(
       postUrl,
       {
@@ -68,12 +72,32 @@ export default function FormContainer() {
     );
     const data = await response.json();
     // handle what responses you might get
-    if (response.status === 201) {
+
+    switch (response.status) {
+      case 201:
         setSuccessData(data.echo);
         setSuccess(true);
-    }
-    else {
-      alert(data.message);
+        break;
+      case 401:
+        alert(data.message);
+        setError(true);
+        setErrorMessage(data.message);
+        throw new Error(401);
+        break;
+      case 500:
+        alert(data.message);
+        setError(true);
+        setErrorMessage(data.message);
+        throw new Error(500);
+        break;
+      case 503:
+        alert(data.message);
+        setError(true);
+        setErrorMessage(data.message);
+        throw new Error(503);
+      default:
+        alert('something unknown is going');
+        break;
     }
   }
 
@@ -81,6 +105,7 @@ export default function FormContainer() {
       return (
 
         <div>
+            {error && <h1 className="is-danger">{ errorMessage }</h1>}
               {
                 loading
                 ? <Loading />
