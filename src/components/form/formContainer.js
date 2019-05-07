@@ -69,26 +69,6 @@ export default function FormContainer() {
     const data = await response.json();
     // handle what responses you might get
 
-    // switch (response.status) {
-    //   case 201:
-    //     setSuccessData(data.echo);
-    //     setSuccess(true);
-    //     break;
-    //   case 401:
-    //     alert(data.message);
-    //     throw new Error(401);
-    //     break;
-    //   case 500:
-    //     alert(data.message);
-    //     throw new Error(500);
-    //     break;
-    //   case 503:
-    //     alert(data.message);
-    //     throw new Error(503);
-    //   default:
-    //     alert('something unknown is going');
-    //     break;
-    // }
     if (response.status === 201) {
       setSuccessData(data.echo);
       setSuccess(true);
