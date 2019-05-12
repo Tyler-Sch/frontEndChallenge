@@ -11,6 +11,7 @@ export default function FormContainer() {
   const [selectData, setSelectData] = useState([]);
   const [success, setSuccess] = useState(false);
   const [successData, setSuccessData] = useState({});
+  const [error, setError] = useState(false);
 
 
   const url = 'http://localhost:49567';
@@ -75,6 +76,7 @@ export default function FormContainer() {
     }
     else {
       alert(data.message);
+      setError(true);
       throw new Error(response.status)
     }
   }
@@ -83,6 +85,7 @@ export default function FormContainer() {
       return (
 
         <div>
+          { error && <div style={{'display': 'none'}}>error</div> }
               {
                 loading
                 ? <Loading />

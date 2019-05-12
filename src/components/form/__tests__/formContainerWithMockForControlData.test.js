@@ -56,6 +56,43 @@ it("take valid information and submit to the api, redirect to success", async ()
         })
 }))
   fireEvent.click(getByText('make user'));
-  await waitForElement(() => getByText('Success!!!'))
-  expect(container.querySelector('h1').innerHTML).toBe('Success!!!')
-  });
+  await waitForElement(() => getByText('Success!!!'));
+  expect(container.querySelector('h1').innerHTML).toBe('Success!!!');
+  expect(container.querySelector('p').innerHTML).toBe(
+    'Hi testFirst testLast'
+  );
+});
+
+it("throws an error when a non-201 response is returned", async () => {
+  global.fetch = jest.fn().mockImplementation(() => ({
+        status: 200,
+        json: () => new Promise((resolve, reject) => {
+          resolve(testData);
+        })
+  }))
+  // global.Error = jest.fn().mockImplementation(() => {
+  //   throw new Error();
+  // });
+
+  const { container, getByText } = render(<FormContainer />);
+  expect(container.querySelector('h1').innerHTML).toBe('Loading... ')
+
+  await waitForElement(() => getByText('In a mock function!'))
+  expect(container.querySelector('button').innerHTML).toBe('make user');
+  global.fetch = jest.fn().mockImplementation(() => ({
+        status: 401,
+        json: () => new Promise((resolve, reject) => {
+          resolve({echo: fake_data});
+        })
+}))
+
+  fireEvent.click(getByText('make user'));
+  await waitForElement(() => getByText('error'));
+  try {
+
+    expect(container.querySelector('div').innerHTML).toBe('error');
+  }
+  catch Erro
+
+
+})
