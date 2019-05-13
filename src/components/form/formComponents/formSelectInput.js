@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import useHasText from './requiredHook';
 
 export default function SelectInput(props) {
   // send props.children as a series of <option></option>
@@ -8,17 +9,7 @@ export default function SelectInput(props) {
   // placholder -> placeholder text in input,
   // smallText -> small text to right of input
 
-  const [hasText, setHasText] = useState(false);
-
-  useEffect(() => {
-    // check if element has input
-    if (props.value.length > 0) {
-      setHasText(true);
-    }
-    else if (props.value.length === 0) {
-      setHasText(false);
-    }
-  },[props.value])
+  const hasText = useHasText(props.value);
 
   return (
     <div className="form-group">

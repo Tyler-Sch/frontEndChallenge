@@ -1,23 +1,8 @@
-import React, { useState, useEffect } from 'react';
-
+import React from 'react';
+import useHasText from './requiredHook';
 
 export default function TextInput(props) {
-  // takes props: type -> ie: email, password, text,
-  //  value -> state passed down from parent,
-  // onchange -> function to modify value to new value,
-  // placholder -> placeholder text in input,
-  // smallText -> small text to right of input 
-  const [hasText, setHasText] = useState(false);
-
-  useEffect(() => {
-    // check if element has input
-    if (props.value.length > 0) {
-      setHasText(true);
-    }
-    else if (props.value.length === 0) {
-      setHasText(false);
-    }
-  },[props.value])
+  const hasText = useHasText(props.value);
 
   return (
     <div className="form-group">

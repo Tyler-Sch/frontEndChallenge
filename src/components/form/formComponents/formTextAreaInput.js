@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import useHasText from './requiredHook';
 
 export default function TextAreaInput(props) {
   // takes props:
   // value -> value kept track of in parent,
   // onchange -> for handling change to value
-  // smallText -> small text to right of input 
-  const [hasText, setHasText] = useState(false);
-
-  useEffect(() => {
-    // check if element has input
-    if (props.value.length > 0) {
-      setHasText(true);
-    }
-    else if (props.value.length === 0) {
-      setHasText(false);
-    }
-  },[props.value])
+  // smallText -> small text to right of input
+  const hasText = useHasText(props.value);
 
   return (
     <div className="form-group">
